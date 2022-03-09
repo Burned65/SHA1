@@ -26,12 +26,12 @@ def process_blocks(m):
     h2 = 0x98badcfe
     h3 = 0x10325476
     h4 = 0xc3d2e1f0
-    a = h0
-    b = h1
-    c = h2
-    d = h3
-    e = h4
     for item in m:
+        a = h0
+        b = h1
+        c = h2
+        d = h3
+        e = h4
         for i in range(80):
             if i <= 19:
                 f = (b & c) | ((b ^ 0b11111111111111111111111111111111) & d)
@@ -77,11 +77,13 @@ def left_rotate(item, rotations):
 
 
 def split_blocks(m):
-    tmp = [[]] * len(m)
+    tmp_final = []
     for i, item in enumerate(m):
+        tmp = []
         for j in range(len(item) // 4):
-            tmp[i].append(int(item[j*4:(j+1)*4].hex(), 16))
-    return tmp
+            tmp.append(int(item[j*4:(j+1)*4].hex(), 16))
+        tmp_final.append(tmp)
+    return tmp_final
 
 
 def add_blocks(m):
@@ -99,3 +101,5 @@ def sha1(m):
 if __name__ == '__main__':
     print(sha1("adadadadadadadadadadadadadadadadadadadadadadadadadadadada".encode()).hex())
     print(hashlib.sha1("adadadadadadadadadadadadadadadadadadadadadadadadadadadada".encode()).hexdigest())
+    print(sha1("".encode()).hex())
+    print(hashlib.sha1("".encode()).hexdigest())
