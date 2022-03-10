@@ -99,7 +99,8 @@ def sha1(m):
 
 
 if __name__ == '__main__':
-    print(sha1("adadadadadadadadadadadadadadadadadadadadadadadadadadadada".encode()).hex())
-    print(hashlib.sha1("adadadadadadadadadadadadadadadadadadadadadadadadadadadada".encode()).hexdigest())
+    print(sha1("this is a very long message which requires more than one block to be hashed.".encode()).hex())
+    print(hashlib.sha1("this is a very long message which requires more than one block to be hashed.".encode()).
+          hexdigest())
     print(sha1("".encode()).hex())
     print(hashlib.sha1("".encode()).hexdigest())
